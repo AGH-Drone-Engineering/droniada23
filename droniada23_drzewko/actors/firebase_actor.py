@@ -1,4 +1,7 @@
 import ray
+import numpy as np
+import cv2
+import base64
 from omegaconf import DictConfig
 import firebase_admin
 from firebase_admin import credentials, firestore
@@ -19,4 +22,17 @@ class FirebaseActor:
             'timestamp': firestore.SERVER_TIMESTAMP,
             'location': firestore.GeoPoint(telemetry.lat, telemetry.lon),
             'altitude': telemetry.alt,
+        })
+
+    def push_detection(self, lat: float, lon: float, name: str, type_: str, img: np.ndarray):
+        _, buf = cv2.imencode('.jpg', img)
+        img_base = base64.b64encode(buf).decode('utf-8')
+        
+        self.db.collection('tree-points').add({
+            'img': img_base,
+            'location': firestore.GeoPoint(lat, lon),
+            'name': name,
+            'shooted': False,
+            'timestamp': firestore.SERVER_TIMESTAMP,
+            'type': type_,
         })
