@@ -2,6 +2,7 @@ import ray
 from omegaconf import DictConfig
 import os
 import cv2
+import time
 
 from droniada23.common.data.stamped_frame import StampedFrame
 
@@ -9,10 +10,13 @@ from droniada23.common.data.stamped_frame import StampedFrame
 @ray.remote
 class LoggerActor:
     def __init__(self, cfg: DictConfig):
-        self.log_dir = cfg.logger.dir
+        self.log_dir = os.path.join(cfg.logger.dir, time.strftime('%Y-%m-%d_%H-%M-%S'))
+        os.makedirs(self.log_dir)
+
         self.frames_dir = os.path.join(self.log_dir, 'frames')
-        self.telemetry_file = os.path.join(self.log_dir, 'telemetry.csv')
         os.makedirs(self.frames_dir)
+
+        self.telemetry_file = os.path.join(self.log_dir, 'telemetry.csv')
 
     def log_stamped_frame(self, stamped_frame: StampedFrame):
         timestamp = stamped_frame.timestamp
