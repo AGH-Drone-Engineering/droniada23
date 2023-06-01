@@ -2,9 +2,9 @@ import ray
 from omegaconf import DictConfig
 import grpc
 
-from droniada23_drzewko.mavic import mavic_pb2
-from droniada23_drzewko.mavic import mavic_pb2_grpc
-from droniada23_drzewko.data.telemetry import Telemetry
+from droniada23.common.mavic import mavic_pb2
+from droniada23.common.mavic import mavic_pb2_grpc
+from droniada23.common.data.telemetry import Telemetry
 
 
 @ray.remote

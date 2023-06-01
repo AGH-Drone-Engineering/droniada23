@@ -2,7 +2,7 @@ import ray
 import numpy as np
 from omegaconf import DictConfig
 
-from droniada23_drzewko.models import load_model
+from droniada23.drzewko.models import load_model
 
 
 @ray.remote

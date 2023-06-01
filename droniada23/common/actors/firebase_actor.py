@@ -6,8 +6,8 @@ from omegaconf import DictConfig
 import firebase_admin
 from firebase_admin import credentials, firestore
 
-from droniada23_drzewko.data.telemetry import Telemetry
-from droniada23_drzewko.secrets import get_secret_path
+from droniada23.common.data.telemetry import Telemetry
+from droniada23.common.secrets import get_secret_path
 
 
 @ray.remote

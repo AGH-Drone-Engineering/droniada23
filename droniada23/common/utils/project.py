@@ -1,4 +1,4 @@
-from droniada23_drzewko.utils import geo
+from . import geo
 
 
 def geo_project(xp: float, yp: float, lat0: float, lon0: float, alt0: float, f_len_px: float) -> tuple[float, float]:

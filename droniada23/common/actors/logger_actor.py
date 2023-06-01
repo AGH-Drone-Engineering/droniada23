@@ -3,7 +3,7 @@ from omegaconf import DictConfig
 import os
 import cv2
 
-from droniada23_drzewko.data.stamped_frame import StampedFrame
+from droniada23.common.data.stamped_frame import StampedFrame
 
 
 @ray.remote

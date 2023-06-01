@@ -1,9 +1,9 @@
 [tool.poetry]
-name = "droniada23-drzewko"
+name = "droniada23"
 version = "0.1.0"
 description = ""
 authors = ["Carbon225 <carbon225@protonmail.com>"]
-packages = [{include = "droniada23_drzewko"}]
+packages = [{include = "droniada23"}]
 
 
 [tool.poetry.dependencies]

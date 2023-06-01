@@ -3,13 +3,14 @@ import hydra
 from omegaconf import DictConfig
 import time
 
-from droniada23_drzewko.actors.firebase_actor import FirebaseActor
-from droniada23_drzewko.actors.camera_actor import CameraActor
-from droniada23_drzewko.actors.detector_actor import DetectorActor
-from droniada23_drzewko.actors.logger_actor import LoggerActor
-from droniada23_drzewko.actors.telem_actor import TelemActor
-from droniada23_drzewko.data.telemetry import Telemetry
-from droniada23_drzewko.data.stamped_frame import StampedFrame
+from droniada23.common.actors.firebase_actor import FirebaseActor
+from droniada23.common.actors.camera_actor import CameraActor
+from droniada23.common.actors.logger_actor import LoggerActor
+from droniada23.common.actors.telem_actor import TelemActor
+from droniada23.common.data.telemetry import Telemetry
+from droniada23.common.data.stamped_frame import StampedFrame
+
+from droniada23.drzewko.actors.detector_actor import DetectorActor
 
 
 @ray.remote
@@ -61,7 +62,7 @@ def main_loop(cfg: DictConfig):
             refs.append(firebase_actor.push_detection.remote(lat, lon, name, type_, img))
 
 
-@hydra.main(version_base=None, config_path='conf', config_name='config')
+@hydra.main(version_base=None, config_path='common/conf', config_name='config')
 def main(cfg: DictConfig):
     ray.get(main_loop.remote(cfg))
 
