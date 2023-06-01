@@ -7,6 +7,7 @@ from droniada23.common.actors.firebase_actor import FirebaseActor
 from droniada23.common.actors.camera_actor import CameraActor
 from droniada23.common.actors.logger_actor import LoggerActor
 from droniada23.common.actors.telem_actor import TelemActor
+from droniada23.common.actors.viewer_actor import ViewerActor
 from droniada23.common.data.telemetry import Telemetry
 from droniada23.common.data.stamped_frame import StampedFrame
 
@@ -17,6 +18,7 @@ def main_loop(cfg: DictConfig):
     telem_actor = TelemActor.remote(cfg)
     logger_actor = LoggerActor.remote(cfg)
     firebase_actor = FirebaseActor.remote(cfg)
+    viewer_actor = ViewerActor.remote('Camera')
 
     while True:
         frame, telemetry = ray.get([
@@ -32,6 +34,7 @@ def main_loop(cfg: DictConfig):
         ray.get([
             firebase_actor.push_telemetry.remote(telemetry),
             logger_actor.log_stamped_frame.remote(stamped_frame),
+            viewer_actor.show.remote(frame),
         ])
 
 

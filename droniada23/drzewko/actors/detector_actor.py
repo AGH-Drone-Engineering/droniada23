@@ -13,7 +13,7 @@ class DetectorActor:
         self.iou = cfg.detector.iou
 
     def detect(self, img: np.ndarray):
-        results = self.model(img, conf=self.conf, iou=self.iou, verbose=False)[0]
-        boxes = results.boxes.numpy()
-        xywhc = [(box.xywh, box.cls) for box in boxes]
+        results = self.model(img, conf=self.conf, iou=self.iou, verbose=False, show=True)[0]
+        boxes = results.boxes
+        xywhc = [(box.xywh.numpy().squeeze(0), box.cls.item()) for box in boxes]
         return xywhc

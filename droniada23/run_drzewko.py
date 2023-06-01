@@ -58,8 +58,11 @@ def main_loop(cfg: DictConfig):
                 type_ = 'unknown'
             x1, y1, w, h = xywh
             x2, y2 = x1 + w, y1 + h
+            x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2)
             img = frame[y1:y2, x1:x2]
             refs.append(firebase_actor.push_detection.remote(lat, lon, name, type_, img))
+
+        ray.get(refs)
 
 
 @hydra.main(version_base=None, config_path='common/conf', config_name='config')
