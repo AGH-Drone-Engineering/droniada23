@@ -3,3 +3,7 @@ defaults:
   - telemetry: mavic
 logger:
   dir: mission_logs
+detector:
+  model: v8nano2.pt
+  conf: 0.6
+  iou: 0.3
