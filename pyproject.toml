@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "droniada23-drzewko"
+version = "0.1.0"
+description = ""
+authors = ["Carbon225 <carbon225@protonmail.com>"]
+packages = [{include = "droniada23_drzewko"}]
+
+
+[tool.poetry.dependencies]
+python = "^3.10"
+ultralytics = "^8.0.111"
+ray = "^2.4.0"
+opencv-python = "^4.7.0.72"
+numpy = "^1.24.3"
+firebase-admin = "^6.1.0"
+geographiclib = "^2.0"
+hydra-core = "^1.3.2"
+
+
+[tool.poetry.group.dev.dependencies]
+urllib3 = "<2.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

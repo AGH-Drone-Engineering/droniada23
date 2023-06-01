@@ -1,0 +1,5 @@
+defaults:
+  - camera: mavic
+  - telemetry: mavic
+logger:
+  dir: mission_logs
